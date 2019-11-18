@@ -48,6 +48,7 @@
             </form>
           <hr />
           <h3 class="display-5 font-weight-bold" id="2fa-otp">Your OTP should appear here</h3>
+          <h4 class="display-5 font-weight-bold" id="2fa-otp-time-left"></h4>
         </div>
         <div class="col-1"></div>
       </div>
@@ -56,6 +57,7 @@
     <script src="https://cdn.jsdelivr.net/npm/unibabel@2.1.8/unibabel.base32.js" integrity="sha256-T/5iiSB3UuNBo1NqVc3GeJMLrXBYojh4qqd7+uWygo4=" crossorigin="anonymous"></script>
 
     <script>
+      "use strict";
       (() => {
         /*
           Assumptions:
@@ -70,10 +72,10 @@
             let intArr = [];
 
             for (let i = 0; i < 8; i++) {
-              intArr[i] = parseInt(binStr.slice(i * 8, i * 8 + 8), 2)
+              intArr[i] = parseInt(binStr.slice(i * 8, i * 8 + 8), 2);
             }
 
-            return Uint8Array.from(intArr).buffer
+            return Uint8Array.from(intArr).buffer;
           };
 
           // https://tools.ietf.org/html/rfc4226#section-5.4
@@ -107,13 +109,14 @@
 
         let computeBtn = document.getElementById('2fa-compute');
         computeBtn.addEventListener('click', () => {
-          let secret = document.getElementById('2fa-secret')
+          let secret = document.getElementById('2fa-secret');
           if (!secret.validity.valid) {
             return;
           }
           computeTOTP(secret.value).then((otp) => {
-            let timeLeft = 30 - ((new Date()).getSeconds() % 30)
-            document.getElementById('2fa-otp').textContent = `${otp} (time left: ${timeLeft}s)`
+            let timeLeft = 30 - ((new Date()).getSeconds() % 30);
+            document.getElementById('2fa-otp').textContent = `${otp}`;
+            document.getElementById('2fa-otp-time-left').textContent = `(time left: ${timeLeft}s)`;
           });
         });
       })();
