@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://www.2faas.dev/*"
+  to = "http://2faas.laroberto.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.2faas.dev/*"
+  to = "https://2faas.laroberto.com/:splat"
+  status = 301
+  force = true
